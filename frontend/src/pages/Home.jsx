@@ -1,5 +1,7 @@
 import MovieCard from "../components/MovieCard.jsx"
 
+import "../css/Home.css"
+
 import { useState } from "react"
 
 function Home () {
