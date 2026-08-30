@@ -11,7 +11,7 @@ function MovieCard({movie}) {
     return (
         <div className="movie-card">
             <div className="movie-poster">
-                <img src={movie.url} alt="{movie.title}" width="350px" height="500px"/>
+                <img src={movie.url} alt="{movie.title}" width="350px" height="500px"/> {/* width and height has to remove */}
             
 
                 <div className="movie-overlay">
