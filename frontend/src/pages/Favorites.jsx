@@ -1,4 +1,4 @@
-import { useMovieContext } from "../contexts/MovieContext.jsx"
+import { useMovieContext } from "../hooks/useMovieContext.js"
 
 import MovieCard from "../components/MovieCard.jsx"
 

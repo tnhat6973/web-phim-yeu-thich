@@ -1,5 +1,7 @@
+import { useMovieContext } from "../hooks/useMovieContext"
+
 import "../css/MovieCard.css"
-import { useMovieContext } from "../contexts/MovieContext.jsx"
+
 
 
 function MovieCard({movie}) {
