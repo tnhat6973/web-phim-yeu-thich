@@ -43,7 +43,7 @@ function Home () {
 
     }, [])
 
-    const handleSearch = async (e) => { // anonymous-arrow function to handle the search functionality
+    const handleSearch = async (e) => { // arrow function to handle the search functionality
         e.preventDefault(); // prevent the default form submission behavior 
         
         if (!searchQuery.trim()) return // if the search query is empty, return early

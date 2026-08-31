@@ -62,6 +62,5 @@ export const MovieProvider = ({children}) => {
     )
 }
 
-
 export default MovieContext
 
