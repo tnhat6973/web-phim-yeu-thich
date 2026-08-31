@@ -1,5 +1,9 @@
-const API_KEY = "647ccb523f5ce59d8175fcda9d437f01";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
+
+if (!API_KEY) {
+    console.error("TMDB API Key is missing. Please create a .env.local file with TMDB_API_KEY=");
+}
 
 export const getPopularMovies = async () => {
     const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
