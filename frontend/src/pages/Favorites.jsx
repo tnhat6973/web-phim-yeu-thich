@@ -1,7 +1,5 @@
 import { useMovieContext } from "../hooks/useMovieContext.js"
-
 import MovieCard from "../components/MovieCard.jsx"
-
 import "../css/Favorites.css"
 
 function Favorites() {

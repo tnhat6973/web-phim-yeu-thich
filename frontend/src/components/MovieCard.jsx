@@ -1,8 +1,5 @@
 import { useMovieContext } from "../hooks/useMovieContext"
-
 import "../css/MovieCard.css"
-
-
 
 function MovieCard({movie}) {
     const {isFavorite, addToFavorites, removeFromFavorites} = useMovieContext()

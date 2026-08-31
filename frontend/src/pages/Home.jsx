@@ -1,9 +1,6 @@
 import MovieCard from "../components/MovieCard.jsx"
-
 import { useState, useEffect } from "react"
-
 import { searchMovies, getPopularMovies } from "../services/api.js"
-
 import "../css/Home.css"
 
 function Home () {
@@ -43,6 +40,7 @@ function Home () {
         }
 
         loadPopularMovies()
+
     }, [])
 
     const handleSearch = async (e) => { // anonymous-arrow function to handle the search functionality
@@ -101,8 +99,6 @@ function Home () {
                     )}
                 </div>
             )}
-
-
 
             {/* Conditional Rendering - method 02 - show movie if it matches (beginning with) the search query
             <div className="movies-grid">

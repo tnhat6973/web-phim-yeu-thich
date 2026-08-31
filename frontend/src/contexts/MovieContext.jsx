@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react"
 
-import { createContext, useContext } from "react"
+import { createContext } from "react"
 
 const MovieContext = createContext()
-
-// Custom hook to use the MovieContext
-// purpose - allows components to access the context value without having to wrap them in a Consumer component
-
-// export const useMovieContext = () => useContext(MovieContext)
 
 // MovieProvider component - provides the context value to its children
 // purpose - allows components to access the context value without having to wrap them in a Consumer component
