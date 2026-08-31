@@ -1,5 +1,5 @@
 .favorites {
-  padding: 2rem;
+  padding: 2rem 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -49,9 +49,28 @@
 .movies-grid {
   animation: fadeIn 0.3s ease-out forwards;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   gap: 1.5rem;
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
+  justify-content: start;
+}
+
+@media (max-width: 1024px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  }
+}
+
+@media (max-width: 768px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
 }

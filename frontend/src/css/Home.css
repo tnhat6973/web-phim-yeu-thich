@@ -42,22 +42,29 @@
   background-color: #f40612;
 }
 
-
-@media (max-width: 639px) {
-  .home {
-    padding: 1rem 0;
-  }
-
-  .search-form {
-    margin-bottom: 1rem;
-  }
-}
-
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   gap: 1.5rem;
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  }
+}
+
+@media (max-width: 768px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
 }
