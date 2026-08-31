@@ -46,7 +46,12 @@
   }
 }
 
-.movies-grid > * {
+.movies-grid {
   animation: fadeIn 0.3s ease-out forwards;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
-
