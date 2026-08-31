@@ -1,25 +1,58 @@
 import MovieCard from "../components/MovieCard.jsx"
 
+import { useState, useEffect } from "react"
+
+import { searchMovies, getPopularMovies } from "../services/api.js"
+
+
+
 import "../css/Home.css"
 
-import { useState } from "react"
+
 
 function Home () {
     // useState hook to manage the state of the search query
-    const [searchQuery, setSearchQuery] = useState(""); 
+    const [searchQuery, setSearchQuery] = useState("");
 
+    // useState hook to manage the state of the movies
+    const [movies, setMovies] = useState([]);
 
-    const movies = [
-        {id: 1, title: "The Matrix", release_date: "1999-03-31"},
-        {id: 2, title: "The Terminator", release_date: "1984-10-26"},
-        {id: 3, title: "The Iron Man", release_date: "2008-04-14"},
-        {id: 4, title: "The Avengers", release_date: "2012-05-04"},
+    // useState hook to manage the state of the error
+    const [error, setError] = useState(null);
+
+    // useState hook to manage the state of the loading
+    const [loading, setLoading] = useState(true)
+
+    // useEffect hook to fetch popular movies when the component mounts
+    // structure of useEffect hook - useEffect(() => {}, [])
+    // the first argument is a callback function that will be executed when the component mounts
+    // the second argument is an array of dependencies that will trigger the callback function when they change
+    // callback function - fetches the popular movies and updates the movies state
+    // dependency array - empty array means the callback function will only be executed when the component mounts
     
-    ];
+    useEffect(() => {
+        const loadPopularMovies = async () => {
+            try {
+                const popularMovies = await getPopularMovies()
+                setMovies(popularMovies)
+
+            } catch (err) {
+                console.log(err)
+                setError("Failed to load movies... ")
+
+            }
+            finally {
+                setLoading(false)
+            }
+        }
+
+        loadPopularMovies()
+    }, [])
 
     const handleSearch = (e) => { // anonymous-arrow function to handle the search functionality
         e.preventDefault(); // prevent the default form submission behavior - 
         alert(searchQuery) // alert the search query when the form is submitted
+        setSearchQuery("")
 
     }
 
@@ -35,19 +68,26 @@ function Home () {
                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
-                <button type="submit" className="search-btn"> Search </button>
+                <button type="submit" className="search-btn"> 
+                    Search 
+                </button>
 
             </form>
 
+            {error && <div className="error-message"> {error} </div>}
 
-             <div className="movies-grid">
-                {movies.map(
-                    (movie) => 
-                        (
+
+            {/* Conditional Rendering - show loading message while fetching data from API */}
+            {loading ? (
+                <div className="loading"> Loading... </div>
+            ) : (
+                <div className="movies-grid">
+                    {movies.map( (movie) => (
                         <MovieCard movie={movie} key={movie.id}/> 
                         )
-                )}
-            </div>
+                    )}
+                </div>
+            )}
 
 
 
