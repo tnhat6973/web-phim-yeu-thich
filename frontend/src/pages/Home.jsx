@@ -4,11 +4,7 @@ import { useState, useEffect } from "react"
 
 import { searchMovies, getPopularMovies } from "../services/api.js"
 
-
-
 import "../css/Home.css"
-
-
 
 function Home () {
     // useState hook to manage the state of the search query
@@ -49,11 +45,27 @@ function Home () {
         loadPopularMovies()
     }, [])
 
-    const handleSearch = (e) => { // anonymous-arrow function to handle the search functionality
-        e.preventDefault(); // prevent the default form submission behavior - 
-        alert(searchQuery) // alert the search query when the form is submitted
-        setSearchQuery("")
+    const handleSearch = async (e) => { // anonymous-arrow function to handle the search functionality
+        e.preventDefault(); // prevent the default form submission behavior 
+        
+        if (!searchQuery.trim()) return // if the search query is empty, return early
 
+        if (loading) return // if the loading state is true, return early
+
+        setLoading(true)
+
+        try {
+            const searchResults = await searchMovies(searchQuery)
+            setMovies(searchResults)
+            setError(null)
+
+        } catch (err) {
+            console.log(err)
+            setError("Failed to search movies...")
+
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -78,6 +90,7 @@ function Home () {
 
 
             {/* Conditional Rendering - show loading message while fetching data from API */}
+            {/* if else syntax: { condition ? ( value if true ) : ( value if false ) } */}
             {loading ? (
                 <div className="loading"> Loading... </div>
             ) : (
