@@ -1,9 +1,21 @@
+import { Link } from "react-router-dom"
 import { useMovieContext } from "../hooks/useMovieContext.js"
+import { useAuth } from "../hooks/useAuth.js"
 import MovieCard from "../components/MovieCard.jsx"
 import "../css/Favorites.css"
 
 function Favorites() {
     const {favorites} = useMovieContext()
+    const { user } = useAuth()
+
+    if (!user) {
+        return (
+            <div className="favorites-empty">
+                <h2> Bạn chưa đăng nhập </h2>
+                <p> <Link to="/login"> Đăng nhập </Link> để xem và lưu phim yêu thích của bạn </p>
+            </div>
+        )
+    }
 
     if(favorites.length > 0) {
         return (

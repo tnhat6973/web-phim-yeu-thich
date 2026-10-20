@@ -1,18 +1,32 @@
+import { useNavigate } from "react-router-dom"
 import { useMovieContext } from "../hooks/useMovieContext"
+import { useAuth } from "../hooks/useAuth.js"
 import "../css/MovieCard.css"
 
 function MovieCard({movie}) {
     const {isFavorite, addToFavorites, removeFromFavorites} = useMovieContext()
+    const { user } = useAuth()
+    const navigate = useNavigate()
 
     const favorite = isFavorite(movie.id)
 
-    function onfavoriteClick(e) {
+    async function onfavoriteClick(e) {
         e.preventDefault()
-        if (favorite) 
-            removeFromFavorites(movie.id)
-        else 
-            addToFavorites(movie)
 
+        // Chưa đăng nhập thì chuyển sang trang đăng nhập
+        if (!user) {
+            navigate("/login")
+            return
+        }
+
+        try {
+            if (favorite)
+                await removeFromFavorites(movie.id)
+            else
+                await addToFavorites(movie)
+        } catch (err) {
+            alert(err.message)
+        }
     }
 
     return (
